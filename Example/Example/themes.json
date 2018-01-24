@@ -1,0 +1,28 @@
+{
+    "color": {
+        "$whiteSmoke" : "#000000ff",
+        "$blue": "#0000ffff"
+    },
+    "font": {
+        "@palatino": "Palatino"
+    },
+    "customVariables": {
+        "~alignCenter": 1,
+        "~alignLeft": 0
+    },
+    "styles": {
+        ".banner": {
+            "backgroundColor" : "$blue",
+            "borderWidth": 2,
+            "borderColor" : "$whiteSmoke",
+            "cornerRadius" : 5
+        },
+        ".h1": {
+            "parent": ".banner",
+            "textColor": "$blue",
+            "textAlign": "~alignCenter",
+            "fontSize": 13,
+            "fontName": "@palatino"
+        }
+    }
+}
