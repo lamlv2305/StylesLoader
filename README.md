@@ -13,7 +13,7 @@ Every ios-app has something like:
  
 For example, button has submit, cancel, verify, back .. styles. You have to set button's attributes/properties to archive a smooth, good looking, and friendly app.
 
-We usually did it by these way:
+We usually did it by these ways:
 
 ```swift
 let button = UIButton(frame: ....)
