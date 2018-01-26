@@ -49,7 +49,8 @@ public class StylesResources {
             #if DEBUG
                 fatalError(msg)
             #else
-                return print(msg)
+                print(msg)
+                return self
             #endif
         }
 
@@ -61,6 +62,7 @@ public class StylesResources {
                 fatalError(error.localizedDescription)
             #else
                 print(error.localizedDescription)
+                return self
             #endif
         }
 
