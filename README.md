@@ -65,7 +65,7 @@ Well, flexible, that's all.
 
 ## Usage:
 
-Define your styles in a .json file 
+Define your styles in a `*.json` file. I named it `themes.json`:
 ```json
 {
     "color": {
