@@ -170,7 +170,6 @@ StylesLoader will ignore unregistered style keys. So don't forget to `register(_
 
 ### [CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)
 
-
 ```ruby
 # Podfile
 use_frameworks!
@@ -181,9 +180,16 @@ target 'YOUR_TARGET_NAME' do
 end
 ```
 
+StylesLoader is in development, so if you want to apply new feature without cocoapods publishment. try
+
+```ruby
+pod 'StylesLoader', :git => 'https://github.com/zoka2305/StylesLoader.git'
+```
+
 ## TODO:
 - Installation
 - Unit test
 - UI test
+- Readme grammar check :D 
 
 
