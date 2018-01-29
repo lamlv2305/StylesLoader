@@ -13,16 +13,20 @@
     "styles": {
         ".banner": {
             "backgroundColor" : "$blue",
-            "borderWidth": 5,
+            "borderWidth": 1,
             "borderColor" : "$whiteSmoke",
-            "cornerRadius" : 10
+            "cornerRadius" : 2
         },
         ".h1": {
             "parent": ".banner",
+            "lineHeight": 40,
             "textColor": "$whiteSmoke",
             "textAlign": "~alignCenter",
             "fontSize": 18,
-            "fontName": "@palatino"
+            "fontName": "@palatino",
+            "shadowOpacity": 0.8,
+            "shadowRadius": 10,
+            "shadowOffset": "{0, 10}"
         }
     }
 }

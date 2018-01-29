@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        lblMain.styles.loadStyles(".h1")
+        lblMain.styles.loadStyles(".h1", extra: "Ahihi hehe\ndmm\ndmm")
+        lblMain.numberOfLines = 0
     }
 
     override func didReceiveMemoryWarning() {

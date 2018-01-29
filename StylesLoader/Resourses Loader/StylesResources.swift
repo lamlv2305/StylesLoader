@@ -46,24 +46,14 @@ public class StylesResources {
 
         guard overrideFields.count == 0 else {
             let msg = "Same keys already existed: \(overrideFields)"
-            #if DEBUG
-                fatalError(msg)
-            #else
-                print(msg)
-                return self
-            #endif
+            return fatalDebug(msg, or: self)
         }
 
         do {
             try provider.validate(styles: styles)
             providers.append(provider)
         } catch {
-            #if DEBUG
-                fatalError(error.localizedDescription)
-            #else
-                print(error.localizedDescription)
-                return self
-            #endif
+            return fatalDebug(error.localizedDescription, or: self)
         }
 
         return self
@@ -107,23 +97,15 @@ public class StylesResources {
     }
 
     /// Get style properties after multi class
-    public func applyStyles(for className: [String], on view: NSObject) {
+    func applyStyles(for className: [String], on view: NSObject, extra value: Any?) {
         if providers.count == 0 {
             let msg = "[WARNING] Do not have any providers, try to registry one !"
-            #if DEBUG
-                fatalError(msg)
-            #else
-                return print(msg)
-            #endif
+            return fatalDebug(msg, or: ())
         }
 
         if fileName == nil {
             let msg = "[WARNING] do not have any themes files to load"
-            #if DEBUG
-                fatalError(msg)
-            #else
-                return print(msg)
-            #endif
+            return fatalDebug(msg, or: ())
         }
 
         var result: [String: Any] = [:]
@@ -140,7 +122,7 @@ public class StylesResources {
 
         providers.forEach { (provider) in
             let styleObject = result.filter { provider.allKeys.contains($0.key) }
-            provider.perform(with: styleObject, on: view)
+            provider.perform(with: styleObject, on: view, extra: value)
         }
     }
 
@@ -148,11 +130,8 @@ public class StylesResources {
     private func validateColor(_ themes: [String: String]) -> [String: String] {
         return themes.reduce([:]) { (dict, data) -> [String: String] in
             guard data.key.hasPrefix("$"), data.value.hexColor != nil else {
-                #if DEBUG
-                    fatalError("Not valid color: [key: \(data.key), value: \(data.value)]")
-                #else
-                    return dict
-                #endif
+                let msg = "Not valid color: [key: \(data.key), value: \(data.value)]"
+                return fatalDebug(msg, or: dict)
             }
 
             var mutateDict = dict
@@ -165,11 +144,8 @@ public class StylesResources {
     private func validateFont(_ themes: [String: String]) -> [String: String] {
         return themes.reduce([:]) { (dict, data) -> [String: String] in
             guard data.key.hasPrefix("@"), UIFont(name: data.value, size: 13) != nil else {
-                #if DEBUG
-                    fatalError("Not valid font: [key: \(data.key), value: \(data.value)]")
-                #else
-                    return dict
-                #endif
+                let msg = "Not valid font: [key: \(data.key), value: \(data.value)]"
+                return fatalDebug(msg, or: dict)
             }
 
             var mutateDict = dict
@@ -205,6 +181,7 @@ public class StylesResources {
 
             if let value = child.value as? String {
                 if value.hasPrefix(ParserSymbol.color.rawValue), colors[value] == nil {
+
                     #if DEBUG
                         fatalError("Not define color for variable: \(value)")
                     #else

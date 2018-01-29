@@ -16,5 +16,5 @@ public protocol StylesProvider {
     func validate(styles: [String: Any]) throws
 
     /// Perform action with key and values
-    func perform(with dict: [String: Any], on object: Any)
+    func perform(with dict: [String: Any], on object: NSObject, extra value: Any?)
 }

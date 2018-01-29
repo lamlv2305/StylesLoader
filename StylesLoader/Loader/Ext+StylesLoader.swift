@@ -9,24 +9,16 @@
 import UIKit
 
 extension String {
-    public var hexColor: UIColor? {
-        guard let regex = try? NSRegularExpression(pattern: "^#([A-Fa-f0-9]{8})$", options: []),
-            regex.matches(in: self, options: [], range: NSMakeRange(0, self.count)).count > 0 else {
-                #if DEBUG
-                    fatalError("Not valid Color: \(self)")
-                #else
-                    return nil
-                #endif
-        }
+    var hexColor: UIColor? {
+        guard
+            let regex = try? NSRegularExpression(pattern: "^#([A-Fa-f0-9]{8})$", options: []),
+            regex.matches(in: self, options: [], range: NSMakeRange(0, self.count)).count > 0
+            else { return fatalDebug("Not valid Color: \(self)", or: nil) }
 
         var cString = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         guard cString.hasPrefix("#") else {
-            #if DEBUG
-                fatalError("Not valid Color: \(cString)")
-            #else
-                return nil
-            #endif
+            return fatalDebug("Not valid Color: \(self)", or: nil)
         }
 
         cString.remove(at: cString.startIndex)
@@ -45,4 +37,26 @@ extension String {
         guard let first = first else { return self }
         return String(first).uppercased() + dropFirst()
     }
+}
+
+private var extraKey: Void?
+extension NSObject {
+    var stylesExtra: Any? {
+        get { return objc_getAssociatedObject(self, &extraKey) }
+        set { objc_setAssociatedObject(self, &extraKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
+func fatalDebug<Type>(
+    _ lastMessage: @autoclosure () -> String,
+    or defaultObject: Type,
+    file: StaticString = #file,
+    line: UInt = #line
+) -> Type {
+    #if DEBUG
+        fatalError(lastMessage(), file: file, line: line)
+    #else
+        print("\(file):\(line): \(lastMessage())")
+        return defaultObject
+    #endif
 }

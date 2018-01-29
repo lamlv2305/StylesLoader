@@ -6,8 +6,6 @@
 //  Copyright © 2018 lamlv. All rights reserved.
 //
 
-import class UIKit.UIView
-
 public struct StylesLoader<Base> {
     /// Base object to apply styles
     public let base: Base
@@ -29,14 +27,26 @@ extension StylesLoaderCompatible {
     }
 }
 
-extension UIView: StylesLoaderCompatible { }
+import class Foundation.NSObject
 
-extension StylesLoader where Base: UIView {
-    public func loadStyles(_ styles: [String], from resources: StylesResources = StylesResources.shared) {
-        resources.applyStyles(for: styles, on: base)
+extension NSObject: StylesLoaderCompatible { }
+
+extension StylesLoader where Base: NSObject {
+    @discardableResult public func loadStyles(
+        _ styles: [String],
+        extra value: Any? = nil,
+        from resources: StylesResources = StylesResources.shared
+    ) -> Base {
+        resources.applyStyles(for: styles, on: base, extra: value)
+        return base
     }
 
-    public func loadStyles(_ style: String, from resources: StylesResources = StylesResources.shared) {
-        resources.applyStyles(for: [style], on: base)
+    @discardableResult public func loadStyles(
+        _ style: String,
+        extra value: Any? = nil,
+        from resources: StylesResources = StylesResources.shared
+    ) -> Base {
+        resources.applyStyles(for: [style], on: base, extra: value)
+        return base
     }
 }
