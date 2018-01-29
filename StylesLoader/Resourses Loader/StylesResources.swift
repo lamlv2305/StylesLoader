@@ -140,8 +140,6 @@ public class StylesResources {
 
         providers.forEach { (provider) in
             let styleObject = result.filter { provider.allKeys.contains($0.key) }
-            print(styleObject)
-            
             provider.perform(with: styleObject, on: view)
         }
     }
