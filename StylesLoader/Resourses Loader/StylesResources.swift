@@ -138,10 +138,11 @@ public class StylesResources {
             }
         }
 
-        for (key, value) in result {
-            providers
-                .first(where: { $0.allKeys.contains(key) })?
-                .perform(with: key, value: value, on: view)
+        providers.forEach { (provider) in
+            let styleObject = result.filter { provider.allKeys.contains($0.key) }
+            print(styleObject)
+            
+            provider.perform(with: styleObject, on: view)
         }
     }
 

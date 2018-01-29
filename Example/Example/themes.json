@@ -1,7 +1,7 @@
 {
     "color": {
-        "$whiteSmoke" : "#000000ff",
-        "$blue": "#0000ffff"
+        "$whiteSmoke" : "#0000ffff",
+        "$blue": "#ffff00ff"
     },
     "font": {
         "@palatino": "Palatino"
@@ -13,15 +13,15 @@
     "styles": {
         ".banner": {
             "backgroundColor" : "$blue",
-            "borderWidth": 2,
+            "borderWidth": 5,
             "borderColor" : "$whiteSmoke",
-            "cornerRadius" : 5
+            "cornerRadius" : 10
         },
         ".h1": {
             "parent": ".banner",
-            "textColor": "$blue",
+            "textColor": "$whiteSmoke",
             "textAlign": "~alignCenter",
-            "fontSize": 13,
+            "fontSize": 18,
             "fontName": "@palatino"
         }
     }

@@ -50,7 +50,7 @@ What do I need to make it better ?
 So StylesLoader has been done by:
 - Load config/styles from json file. ( from url files in futures )
 - Apply styles on runtime by StyleProvider
-- Styles on json, but we have specific using by register ```perform(with:value:on)``` functions
+- Styles on json, but we have specific using by register ```perform(with:on)``` functions
 - Make an extension for UIView, where we can easily to apply style with 1 line of code ( and have a ton of codes behind that xD )
 
 Read config file is not a good ideas, because of:
@@ -108,7 +108,6 @@ func application(
 ) -> Bool {
   StylesResources.shared.load(from: "themes")
   StylesResources.shared
-    .register(GeneralStyleProvider())
     .register(LayerStyleProvider())
     .register(TextStyleProvider())
     
@@ -161,9 +160,24 @@ For example: you need text align left and center, but it was mark as number, so 
 ## Can I make my custom key, such as: "GiveMeMana" ?
 Of course, you do. 
 
-In the first commit, StylesLoader has 3 providers: `GeneralStyleProvider`, `LayerStyleProvider`, `TextStyleProvider`. You can create your new `StylesProvider` then register in `application(_:didFinishLaunchingWithOptions)`
+By default, StylesLoader has 2 providers: `LayerStyleProvider`, `TextStyleProvider`. You can create your new `StylesProvider` then register in `application(_:didFinishLaunchingWithOptions)`
 
-StylesLoader will ignore unregistered style keys. So don't forget to `register`
+StylesLoader will ignore unregistered style keys. So don't forget to `register(_:)`
+
+## Installation
+
+### [CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)
+
+
+```ruby
+# Podfile
+use_frameworks!
+platform :ios, '9.0'
+
+target 'YOUR_TARGET_NAME' do
+    pod 'StylesLoader'
+end
+```
 
 ## TODO:
 - Installation

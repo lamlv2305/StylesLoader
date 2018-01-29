@@ -12,7 +12,6 @@
 		2E42FA0D20184BE4001BD797 /* StylesLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E42F9FF20184BE4001BD797 /* StylesLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E42FA2120184BEF001BD797 /* Ext+StylesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1720184BEF001BD797 /* Ext+StylesLoader.swift */; };
 		2E42FA2220184BEF001BD797 /* StylesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1820184BEF001BD797 /* StylesLoader.swift */; };
-		2E42FA2320184BEF001BD797 /* GeneralStyleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1A20184BEF001BD797 /* GeneralStyleProvider.swift */; };
 		2E42FA2420184BEF001BD797 /* LayerStyleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1B20184BEF001BD797 /* LayerStyleProvider.swift */; };
 		2E42FA2520184BEF001BD797 /* StylesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1C20184BEF001BD797 /* StylesProvider.swift */; };
 		2E42FA2620184BEF001BD797 /* TextStyleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42FA1D20184BEF001BD797 /* TextStyleProvider.swift */; };
@@ -38,11 +37,11 @@
 		2E42FA0C20184BE4001BD797 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E42FA1720184BEF001BD797 /* Ext+StylesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ext+StylesLoader.swift"; sourceTree = "<group>"; };
 		2E42FA1820184BEF001BD797 /* StylesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesLoader.swift; sourceTree = "<group>"; };
-		2E42FA1A20184BEF001BD797 /* GeneralStyleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralStyleProvider.swift; sourceTree = "<group>"; };
 		2E42FA1B20184BEF001BD797 /* LayerStyleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerStyleProvider.swift; sourceTree = "<group>"; };
 		2E42FA1C20184BEF001BD797 /* StylesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesProvider.swift; sourceTree = "<group>"; };
 		2E42FA1D20184BEF001BD797 /* TextStyleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStyleProvider.swift; sourceTree = "<group>"; };
 		2E42FA1F20184BEF001BD797 /* StylesResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesResources.swift; sourceTree = "<group>"; };
+		2E59B8BB201ECA9A00A8F07D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +84,7 @@
 		2E42F9FE20184BE4001BD797 /* StylesLoader */ = {
 			isa = PBXGroup;
 			children = (
+				2E59B8BB201ECA9A00A8F07D /* README.md */,
 				2E42FA1620184BEF001BD797 /* Loader */,
 				2E42FA1E20184BEF001BD797 /* Resourses Loader */,
 				2E42FA1920184BEF001BD797 /* StylesProvider */,
@@ -115,7 +115,6 @@
 		2E42FA1920184BEF001BD797 /* StylesProvider */ = {
 			isa = PBXGroup;
 			children = (
-				2E42FA1A20184BEF001BD797 /* GeneralStyleProvider.swift */,
 				2E42FA1B20184BEF001BD797 /* LayerStyleProvider.swift */,
 				2E42FA1C20184BEF001BD797 /* StylesProvider.swift */,
 				2E42FA1D20184BEF001BD797 /* TextStyleProvider.swift */,
@@ -245,7 +244,6 @@
 				2E42FA2520184BEF001BD797 /* StylesProvider.swift in Sources */,
 				2E42FA2220184BEF001BD797 /* StylesLoader.swift in Sources */,
 				2E42FA2620184BEF001BD797 /* TextStyleProvider.swift in Sources */,
-				2E42FA2320184BEF001BD797 /* GeneralStyleProvider.swift in Sources */,
 				2E42FA2120184BEF001BD797 /* Ext+StylesLoader.swift in Sources */,
 				2E42FA2720184BEF001BD797 /* StylesResources.swift in Sources */,
 			);

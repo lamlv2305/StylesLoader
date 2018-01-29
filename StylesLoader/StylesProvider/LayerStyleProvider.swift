@@ -10,7 +10,7 @@ import UIKit
 
 public struct LayerStyleProvider: StylesProvider {
     fileprivate let uiColorKey: [String] = []
-    fileprivate let cgColorKey: [String] = ["borderColor", "shadowColor"]
+    fileprivate let cgColorKey: [String] = ["borderColor", "shadowColor", "backgroundColor"]
     fileprivate let doubleKey: [String] = ["cornerRadius", "borderWidth", "shadowRadius", "shadowOpacity"]
 
     public var allKeys: [String] {
@@ -19,27 +19,29 @@ public struct LayerStyleProvider: StylesProvider {
 
     public init() { }
 
-    public func perform(with key: String, value: Any, on object: Any) {
+    public func perform(with dict: [String: Any], on object: Any) {
         guard let view = object as? UIView else { return }
-        let selector = Selector("set\(key.firstUppercased):")
-        guard view.layer.responds(to: selector) else { return }
+        for (key, value) in dict {
+            let selector = Selector("set\(key.firstUppercased):")
+            guard view.layer.responds(to: selector) else { continue }
 
-        var mutateValue: Any?
+            var mutateValue: Any?
 
-        if doubleKey.contains(key), let currentValue = value as? Double {
-            mutateValue = currentValue
+            if doubleKey.contains(key), let currentValue = value as? Double {
+                mutateValue = currentValue
+            }
+
+            if uiColorKey.contains(key), let currentValue = value as? String, let color = currentValue.hexColor {
+                mutateValue = color
+            }
+
+            if cgColorKey.contains(key), let currentValue = value as? String, let color = currentValue.hexColor {
+                mutateValue = color.cgColor
+            }
+
+            guard let safeValue = mutateValue else { continue }
+            view.layer.perform(selector, with: safeValue)
         }
-
-        if uiColorKey.contains(key), let currentValue = value as? String, let color = currentValue.hexColor {
-            mutateValue = color
-        }
-
-        if cgColorKey.contains(key), let currentValue = value as? String, let color = currentValue.hexColor {
-            mutateValue = color.cgColor
-        }
-
-        guard let safeValue = mutateValue else { return }
-        view.layer.perform(selector, with: safeValue)
     }
 
     public func validate(styles: [String: Any]) throws {
