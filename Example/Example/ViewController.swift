@@ -23,15 +23,3 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
-struct TestProvider: StylesProvider {
-    var allKeys: [String] = []
-
-    func validate(styles: [String: Any]) throws {
-
-    }
-
-    func perform(with key: String, value: Any, on object: Any) {
-
-    }
-}
