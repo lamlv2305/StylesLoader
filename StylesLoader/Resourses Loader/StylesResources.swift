@@ -107,7 +107,7 @@ public class StylesResources {
     }
 
     /// Get style properties after multi class
-    func applyStyles(for className: [String], on view: UIView) {
+    public func applyStyles(for className: [String], on view: UIView) {
         if providers.count == 0 {
             let msg = "[WARNING] Do not have any providers, try to registry one !"
             #if DEBUG
