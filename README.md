@@ -2,6 +2,8 @@
 ## Get style properties from json file then apply to specific view
 ======================================
 
+![Showcase image](/Showcase.png)
+
 ## At a glace:
 
 Every ios-app has something like:
