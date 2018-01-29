@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,20 +20,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZH-I4-nHs">
-                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="8ZH-I4-nHs" secondAttribute="height" id="sFU-Iv-d31"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="323.5" width="155.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUB-hd-zfq">
+                                <rect key="frame" x="203.5" y="292.5" width="155.5" height="83"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="is simply ">
+                                        <attributes>
+                                            <color key="NSBackgroundColor" red="1" green="0.056107677723830074" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="23" name="Palatino-Roman"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" lineSpacing="7" lineHeightMultiple="3" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ejf-bk-Wi9"/>
-                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="gfJ-pV-MX1"/>
-                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lDW-PK-6R2"/>
+                            <constraint firstItem="YUB-hd-zfq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="DKx-bu-KZM"/>
+                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" constant="-32" id="Shg-dw-ot6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YUB-hd-zfq" secondAttribute="trailing" constant="16" id="TIq-PC-tZW"/>
+                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="UmE-Ek-UC1"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8ZH-I4-nHs" secondAttribute="trailing" constant="20" symbolic="YES" id="dyv-xq-BAz"/>
+                            <constraint firstItem="YUB-hd-zfq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="lbw-fE-7JY"/>
+                            <constraint firstItem="YUB-hd-zfq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" constant="-32" id="qM0-aQ-oFY"/>
+                            <constraint firstItem="8ZH-I4-nHs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sRT-WQ-Tfa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

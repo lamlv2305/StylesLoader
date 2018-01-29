@@ -14,69 +14,80 @@ public struct TextStyleProvider: StylesProvider {
         case fontSize
         case fontName
         case textAlign
+        case lineHeight
         case unknown
     }
 
     public var allKeys: [String] {
-        let myKeys: [TypeSafeStype] = [.textColor, .fontSize, .fontName, .textAlign]
+        let myKeys: [TypeSafeStype] = [.textColor, .fontSize, .fontName, .textAlign, .lineHeight]
         return myKeys.flatMap { $0.rawValue }
     }
 
     public init() { }
 
-    public func perform(with dict: [String: Any], on object: Any) {
-        guard let label = object as? UILabel, let text = label.text else { return }
-
-        var attributedDictionary: [NSAttributedStringKey: Any] = [:]
-
-        for (key, value) in dict {
-            guard let styleType = TypeSafeStype(rawValue: key) else { continue }
-
-            switch styleType {
-            case .textColor:
-                guard let text = value as? String, let color = text.hexColor else {
-                    continue
-                }
-
-                attributedDictionary[NSAttributedStringKey.foregroundColor] = color
-
-            case .fontSize:
-                let attributedFont = attributedDictionary[NSAttributedStringKey.font] as? UIFont
-                var currentFont = attributedFont ?? UIFont.systemFont(ofSize: 14)
-
-                if let size = value as? CGFloat, let newFont = UIFont(name: currentFont.fontName, size: size) {
-                    currentFont = newFont
-                }
-
-                attributedDictionary[NSAttributedStringKey.font] = currentFont
-
-            case .fontName:
-                let attributedFont = attributedDictionary[NSAttributedStringKey.font] as? UIFont
-                var currentFont = attributedFont ?? UIFont.systemFont(ofSize: 14)
-
-                if let fontName = value as? String, let newFont = UIFont(name: fontName, size: currentFont.pointSize) {
-                    currentFont = newFont
-                }
-
-                attributedDictionary[NSAttributedStringKey.font] = currentFont
-
-            case .textAlign:
-                guard let newValue = value as? Double,
-                    let alignment = NSTextAlignment(rawValue: Int(newValue))
-                    else { continue }
-
-                let currentStyles = attributedDictionary[NSAttributedStringKey.paragraphStyle] as? NSMutableParagraphStyle
-                let newStyles = currentStyles ?? NSMutableParagraphStyle()
-
-                newStyles.alignment = alignment
-                attributedDictionary[NSAttributedStringKey.paragraphStyle] = newStyles
-
-            default:
-                continue
-            }
+    public func perform(with dict: [String: Any], on object: NSObject, extra value: Any?) {
+        let selectorName = "setAttributedText:"
+        let selector = Selector(selectorName)
+        guard object.responds(to: selector) else {
+            let msg = "\(object.classForCoder) do not respond to \(selectorName)"
+            return fatalDebug(msg, or: ())
         }
 
-        label.attributedText = NSMutableAttributedString(string: text, attributes: attributedDictionary)
+        let font = extractFont(from: dict) ?? UIFont.systemFont(ofSize: 17)
+        let paragraphStyle = extractParagraph(from: dict, with: font)
+
+        var attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: font,
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+        ]
+
+        /**
+         *  Convert lineHeight of sketch/css to minimumLineHeight and baselineOffset
+         */
+        if paragraphStyle.minimumLineHeight > font.lineHeight {
+            let offset = paragraphStyle.minimumLineHeight - font.lineHeight
+            attributes[NSAttributedStringKey.baselineOffset] = offset * 0.25
+        }
+
+        if let textColor = dict[TypeSafeStype.textColor.rawValue] as? String,
+            let color = textColor.hexColor {
+            attributes[NSAttributedStringKey.foregroundColor] = color
+        }
+
+        guard attributes.keys.count > 0, let text = value as? String else { return }
+        object.perform(selector, with: NSAttributedString(string: text, attributes: attributes))
+    }
+
+    private func extractFont(from dict: [String: Any]) -> UIFont? {
+        var fontName: String?
+        var fontSize: Double = 17
+
+        if let fName = dict[TypeSafeStype.fontName.rawValue] as? String {
+            fontName = fName
+        }
+
+        if let fSize = dict[TypeSafeStype.fontSize.rawValue] as? Double {
+            fontSize = fSize
+        }
+
+        guard let safeFont = fontName else { return nil }
+        return UIFont(name: safeFont, size: CGFloat(fontSize))
+    }
+
+    private func extractParagraph(from dict: [String: Any], with font: UIFont) -> NSParagraphStyle {
+        let styles = NSMutableParagraphStyle()
+
+        if let newValue = dict[TypeSafeStype.textAlign.rawValue] as? Double,
+            let alignment = NSTextAlignment(rawValue: Int(newValue)) {
+            styles.alignment = alignment
+        }
+
+        if let lineHeight = dict[TypeSafeStype.lineHeight.rawValue] as? Double {
+            styles.minimumLineHeight = max(CGFloat(lineHeight), font.lineHeight)
+//            styles.lineHeightMultiple = CGFloat(lineHeight) / font.lineHeight
+        }
+
+        return styles
     }
 
     public func validate(styles: [String: Any]) throws {
@@ -93,7 +104,7 @@ public struct TextStyleProvider: StylesProvider {
         switch style {
         case .fontName:
             if value is String { return }
-        case .fontSize:
+        case .fontSize, .lineHeight:
             if value is Double { return }
         case .textAlign:
             if value is Int { return }
