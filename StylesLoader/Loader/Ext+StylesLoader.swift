@@ -9,7 +9,7 @@
 import UIKit
 
 extension String {
-    var hexColor: UIColor? {
+    public var hexColor: UIColor? {
         guard let regex = try? NSRegularExpression(pattern: "^#([A-Fa-f0-9]{8})$", options: []),
             regex.matches(in: self, options: [], range: NSMakeRange(0, self.count)).count > 0 else {
                 #if DEBUG
